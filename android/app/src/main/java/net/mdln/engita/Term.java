@@ -19,12 +19,12 @@ class Term {
       String forms,
       String pos,
       String translation,
-      Map<SimpleTense, String> conjugations) {
+      SortedMap<SimpleTense, String> conjugations) {
     if (root == null
         || forms == null
         || pos == null
         || translation == null
-        || conjugation == null) {
+        || conjugations == null) {
       throw new NullPointerException();
     }
     this.root = root;

@@ -25,10 +25,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    this.dict =
-        Dict.fromStreams(
-            getResources().openRawResource(R.raw.dictionary_csv),
-            getResources().openRawResource(R.raw.conjugation_csv));
+    this.dict = Dict.fromStream(getResources().openRawResource(R.raw.dictionary_jsonl));
 
     this.searchBox = findViewById(R.id.search_box);
     this.footerLink = findViewById(R.id.footer_link);

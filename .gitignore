@@ -1,2 +1,6 @@
+android/app/build
+android/app/src/main/res/raw/dictionary_jsonl
 android/build
+android/.gradle
 bin
+*.swp

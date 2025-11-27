@@ -61,21 +61,18 @@ class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHolder> {
 
   private void showConjugationDialog(ViewHolder holder, Term term) {
     StringBuilder message = new StringBuilder();
-
-    for (String tense : term.getSortedTenses()) {
-      String forms = term.conjugations.get(tense);
-      String[] formArray = forms.split("/");
-
-      message.append(tense.toUpperCase()).append(":\n");
-      String[] labels = {"1sg", "2sg", "3sg", "1pl", "2pl", "3pl"};
-      for (int i = 0; i < formArray.length && i < labels.length; i++) {
-        if (!formArray[i].isEmpty()) {
-          message.append("  ").append(labels[i]).append(": ").append(formArray[i]).append("\n");
-        }
-      }
-      message.append("\n");
-    }
-
+    term.conjugations.forEach(
+        (tense, forms) -> {
+          String[] formArray = forms.split("/");
+          message.append(tense.name().toUpperCase()).append(":\n");
+          String[] labels = {"1sg", "2sg", "3sg", "1pl", "2pl", "3pl"};
+          for (int i = 0; i < formArray.length && i < labels.length; i++) {
+            if (!formArray[i].isEmpty()) {
+              message.append("  ").append(labels[i]).append(": ").append(formArray[i]).append("\n");
+            }
+          }
+          message.append("\n");
+        });
     new AlertDialog.Builder(holder.itemView.getContext())
         .setTitle(term.root)
         .setMessage(message.toString())
