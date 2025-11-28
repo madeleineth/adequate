@@ -1,0 +1,64 @@
+Claude, we are going to create an Italian-English dictionary datafile. For each
+word in the document, respond with a single comma-separated line with EXACTLY 8
+fields. The columns are:
+
+- the word itself. Normalize capitalization: only capitalize proper nouns
+  (names of people, places, organizations). Common words like prepositions,
+  articles, conjunctions, and regular nouns should be lowercase even if they
+  appear capitalized in the text (e.g. at the start of a sentence). For
+  example, "Tra" at the beginning of a sentence should be output as "tra,tra,
+  prep,...". If the word intrinsically ends with an apostrophe, for example the
+  article "l'", include it. Include no other punctuation, either within or
+  separate from words. When an elided article or preposition (l', d', dell',
+  all', etc.) appears before a word, tokenize it as TWO separate words: the
+  article/preposition with apostrophe (e.g. "l'") and the following word (e.g.
+  "armonium"). Process EVERY word in the text, including all articles (il, la,
+  un), prepositions (di, a, da, in, con, su, per), conjunctions (e, ma, o,
+  che), pronouns (io, mi, ti, si, ci, ne), and particles. Skip only punctuation
+  marks and non-word tokens.
+
+- the root of the word. For nouns, this is the singular. For verbs, it is the
+  infinitive (including reflexive "si" if applicable, e.g. "lavarsi"). For
+  adverbs and other invariable words, it is the word itself. For nouns that
+  never appear singular, leave it in plural. For adjectives, pronouns, etc.
+  which can appear as multiple genders, it is the masculine. For nouns that
+  change meaning based on gender, use the root in the gender as it appears in
+  the text. Special cases: all definite articles (il, lo, la, l', i, gli, le)
+  have root "il". All indefinite articles (un, uno, una, un') have root "un".
+  Articulated prepositions (del, dello, della, dell', dei, degli, delle, nel,
+  nello, etc.) should have as root the preposition and "il" separated by a
+  space. For example: "nello" → "in il", "della" → "di il", "dalla" → "da il",
+  "agli" → "a il", "sullo" → "su il". Demonstratives like "questo/questa/
+  questi/queste" have root "questo", "quello/quella/quei/quegli/quelle/quel/
+  quell'" have root "quello". Adjectives with article-like forms such as
+  "bello/bella/bel/bell'/bei/begli/belle" have root "bello".
+
+- the part of speech, always "n", "v", "adj", "adv", "art", "prep", "conj",
+  "prep art" (articulated preposition), "pron", "particle", "int"
+  (interjection), "other", and "unknown". When in doubt, or if the word is not
+  Italian, pick unknown. If the sense is known from context, always use the
+  sense in which the word is used even if it has multiple senses. For example
+  if the text is "Pranzi alle 13" the line for "Pranzi" begins
+  "pranzi,pranzare,v,..." even though "pranzi" is usually a noun. If the sense
+  cannot be determined, use "unknown".
+
+- the gender if the word has a grammatical gender ("m" or "f") or "na" if the
+  word is not a word with grammatical gender, or "unknown" if it is and the
+  gender is ambiguous.
+
+- the number, "sg"/"pl"/"unknown" for nouns, adjectives, pronouns, verbs, etc.
+  for which "singular" or "plural" is defined and "na" for others.
+
+- the tense, "infinitive", "present", "imperfect", "future", "conditional",
+  "present subjunctive", "imperfect subjunctive", "remote past", "imperative",
+  "past participle", "present participle", "gerund", "unknown", "na"
+
+- the person, "1", "2", "3", or "na" if not applicable
+
+- the simplest English translation of the root word as it is used in context.
+  Leave off descriptive and explanatory words. E.g. "Pranzi" used as a verb
+  should have "to lunch" or "to have lunch". If the translation cannot be
+  determined from context, use "unknown".
+
+Format: word,root,pos,gender,number,tense,person,translation
+IMPORTANT: Each line must have EXACTLY 8 comma-separated fields, no more, no less.

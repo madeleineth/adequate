@@ -1,0 +1,2 @@
+Downloaded: https://dumps.wikimedia.org/itwiki/latest/itwiki-latest-pages-articles-multistream1.xml-p1p316052.bz2
+Downloaded: https://www.gutenberg.org/cache/epub/1012/pg1012.txt as dict/divina-commedia.txt

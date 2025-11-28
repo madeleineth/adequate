@@ -1,0 +1,23 @@
+Good evening Claude. You and I are making an Italian-English dictionary Android
+app. But for debugging we're using the CLI version. There is a list,
+dict/words.txt, and I want to make sure search results for each word in that
+list are reasonable. Search results should include all the very common senses
+of a word but not obscure ones. Search results for non-Italian terms should be
+empty. For each word, run:
+
+  make runcli WORD="wordgoeshere"
+
+This will output a line for each (root, part-of-speech) combination. Verbs will
+be followed by indented present and imperfect conjugtations. (We will later do
+others.) 
+
+We previously did a round of editing on the source data where you can read the
+prompt in dict/prompt-edit.txt. But now, we want to ensure that common words
+have a holistically reasonable set of search results: not just that the
+individual records make sense but that obscure or non-Italian words or words
+with non-canonical root forms are excluded. So, for every word in
+dict/words.txt, which are the most common Italian words, run 'make runcli
+WORD=...' to get its search results and, if you don't like what you see, add to
+dict/dictionary-modify.csv or dict/dictionary-delete.csv.
+
+As a pilot, do this for just the first ten words.
