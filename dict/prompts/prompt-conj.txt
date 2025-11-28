@@ -1,0 +1,94 @@
+You are reviewing an Italian-English dictionary file (dict/dictionary.csv) to generate conjugation data for irregular verbs. Your task is to identify verbs that have irregular conjugations and output their conjugated forms.
+
+INPUT FORMAT (dict/dictionary.csv):
+CSV file with columns: root,forms,pos,definition,count
+- For verbs (pos="v"), the root is the infinitive (e.g., "essere", "avere", "andare")
+- Process ONLY entries where pos="v"
+
+OUTPUT REQUIREMENTS:
+1. Review EVERY verb in dict/dictionary.csv
+2. For each verb, determine if it is IRREGULAR in the present indicative tense
+3. Output ONLY irregular verbs to dict/conjugation.csv
+4. Output format: infinitive,tense,forms (with CSV header)
+
+WHAT IS AN IRREGULAR VERB:
+A verb is IRREGULAR if its present indicative conjugation does NOT follow the standard patterns:
+
+Regular -are verbs (e.g., parlare):
+  parlo, parli, parla, parliamo, parlate, parlano
+
+Regular -ere verbs (e.g., vendere):
+  vendo, vendi, vende, vendiamo, vendete, vendono
+
+Regular -ire verbs type 1 (e.g., partire):
+  parto, parti, parte, partiamo, partite, partono
+
+Regular -ire verbs type 2 (e.g., finire):
+  finisco, finisci, finisce, finiamo, finite, finiscono
+
+If a verb deviates from these patterns in ANY person/number, it is irregular and should be included.
+
+Common irregular verbs include: essere, avere, andare, fare, dare, stare, venire, dire, potere, volere, dovere, sapere, etc.
+
+OUTPUT FORMAT:
+infinitive,tense,forms
+
+Where:
+- infinitive: the verb infinitive from the root column (e.g., "essere", "avere")
+- tense: the tense being conjugated (for now, always "present")
+- forms: slash-separated conjugations in this exact order:
+  first-person-singular/second-person-singular/third-person-singular/first-person-plural/second-person-plural/third-person-plural
+
+EXAMPLES:
+
+essere,present,sono/sei/è/siamo/siete/sono
+(Reason: highly irregular - sono, sei, è, siamo, siete, sono)
+
+avere,present,ho/hai/ha/abbiamo/avete/hanno
+(Reason: irregular - ho, hai, ha instead of regular pattern)
+
+andare,present,vado/vai/va/andiamo/andate/vanno
+(Reason: irregular - vado, vai, va, vanno instead of regular pattern)
+
+fare,present,faccio/fai/fa/facciamo/fate/fanno
+(Reason: irregular - faccio, fai, fa, facciamo, fate, fanno)
+
+parlare - DO NOT OUTPUT
+(Reason: regular -are verb - parlo, parli, parla, parliamo, parlate, parlano)
+
+vendere - DO NOT OUTPUT
+(Reason: regular -ere verb - vendo, vendi, vende, vendiamo, vendete, vendono)
+
+mettere - DO NOT OUTPUT
+(Reason: regular in present tense - metto, metti, mette, mettiamo, mettete, mettono - even though it's irregular in other tenses like passato remoto)
+
+piovere,present,//piove///
+(Reason: defective verb - only occurs in 3rd person singular, which makes it irregular even though "piove" follows the regular -ere pattern)
+
+CRITICAL RULES:
+- ONLY output verbs that are irregular
+- Do NOT output regular verbs
+- Use the exact infinitive from the root column in dict/dictionary.csv
+- For now, only output present tense (tense="present")
+- Forms must be in the exact order: 1sg/2sg/3sg/1pl/2pl/3pl
+- Forms field must ALWAYS have exactly 5 slashes (6 positions), even if some positions are empty
+- If a form does not occur, leave that position empty (e.g., "//piove///" for a verb only in 3rd person singular)
+- Include reflexive verbs if they are irregular (e.g., "accorgersi" if irregular)
+- For reflexive verbs, include the reflexive pronoun in each form (e.g., "mi accorgo/ti accorgi/si accorge/ci accorgiamo/vi accorgete/si accorgono")
+
+FUTURE EXPANSION:
+This prompt is designed to support other tenses in the future. When requested, you may be asked to generate conjugations for:
+- imperfect
+- future
+- conditional
+- present subjunctive
+- imperfect subjunctive
+- remote past (passato remoto)
+- imperative
+- past participle
+- present participle
+- gerund
+
+For now, focus ONLY on the present indicative tense.
+
+Work systematically through all verbs in the dictionary. Be accurate and only include truly irregular verbs. Do not include any verbs that are regular in tense in question (present for now) which are irregular in another tense. If a verb does not, due to its nature, occur in some form, leave that form blank. If a verb does not occur in some number/person but is regular in those numbers/persons where it does occur, that counts as irregular. The /-separated list should always have exactly five /s, even if some are empty.

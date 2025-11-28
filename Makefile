@@ -6,6 +6,7 @@ export FORMAT_JAR=bin/google-java-format.jar
 export FORMAT_JAR_URL=https://github.com/google/google-java-format/releases/download/v1.32.0/google-java-format-1.32.0-all-deps.jar
 export PATH:=$(PATH):$(ANDROID_HOME)/platform-tools:$(ANDROID_HOME)/tools
 
+DICT_BASE:=dict/annotated/dict-haiku-n100.csv dict/annotated/dict-haiku-s100-n216.csv dict/annotated/dict-haiku-s316-n192.csv
 DICT_RES:=android/app/src/main/res/raw/dictionary_jsonl
 ENGITA_JAR_SRC:=android/app/src/main/java/net/mdln/engita/Dict.java android/app/src/main/java/net/mdln/engita/Term.java cli/net/mdln/engita/Main.java
 ENGITA_JAR:=cli/build/engita.jar
@@ -47,8 +48,8 @@ bundle: $(DICT_RES)
 	export KEYSTORE_PASSWORD && export KEY_PASSWORD=$$KEYSTORE_PASSWORD && \
 	cd android && ./gradlew bundleRelease'
 
-$(DICT_RES): dict/dictionary.jsonl
-	mkdir -p $$(dirname $@) && cp -f $< $@
+$(DICT_RES): $(DICT_BASE) dict/make_jsonl.py dict/conjugate.py dict/conjugation.csv dict/dictionary-delete.csv dict/dictionary-modify.csv
+	dict/make_jsonl.py $(DICT_BASE) --min-count 2 --output $(DICT_RES)
 
 cli: $(ENGITA_JAR)
 

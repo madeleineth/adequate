@@ -6,6 +6,6 @@ bin
 cli/build
 dict/annotated
 dict/wikipedia_articles.json
-dict/words.txt
+dict/words*.txt
 __pycache__
 *.swp
