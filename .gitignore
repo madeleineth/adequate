@@ -3,4 +3,9 @@ android/app/src/main/res/raw/dictionary_jsonl
 android/build
 android/.gradle
 bin
+cli/build
+dict/annotated
+dict/wikipedia_articles.json
+dict/words.txt
+__pycache__
 *.swp
