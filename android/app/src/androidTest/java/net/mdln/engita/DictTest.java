@@ -18,8 +18,9 @@ public class DictTest {
         "{\"r\":\"essere\",\"f\":\"\",\"p\":\"v\",\"t\":\"to be\","
             + "\"c\":{\"present\":\"sono/sei/è/siamo/siete/sono\","
             + "\"imperfect\":\"ero/eri/era/eravamo/eravate/erano\"}}\n";
-    Dict dict = Dict.fromStream(new ByteArrayInputStream(jsonl.getBytes(StandardCharsets.UTF_8)));
-    List<Term> results = dict.search("essere", 10);
+    Dict dict =
+        Dict.fromStream(new ByteArrayInputStream(jsonl.getBytes(StandardCharsets.UTF_8)), 10);
+    List<Term> results = dict.search("essere");
     assertEquals(1, results.size());
     Term term = results.get(0);
     assertEquals("essere", term.root);
@@ -36,8 +37,9 @@ public class DictTest {
         "{\"r\":\"venire\",\"f\":\"\",\"p\":\"v\",\"t\":\"to come\","
             + "\"c\":{\"present\":\"vengo/vieni/viene/veniamo/venite/vengono\","
             + "\"imperfect\":\"venivo/venivi/veniva/venivamo/venivate/venivano\"}}\n";
-    Dict dict = Dict.fromStream(new ByteArrayInputStream(jsonl.getBytes(StandardCharsets.UTF_8)));
-    results = dict.search("veniva", 10);
+    Dict dict =
+        Dict.fromStream(new ByteArrayInputStream(jsonl.getBytes(StandardCharsets.UTF_8)), 10);
+    List<Term> results = dict.search("veniva");
     assertEquals(1, results.size());
     assertEquals("venire", results.get(0).root);
   }
@@ -47,17 +49,18 @@ public class DictTest {
     String jsonl =
         "{\"r\":\"città\",\"f\":\"\",\"p\":\"n\",\"t\":\"city\"}\n"
             + "{\"r\":\"perché\",\"f\":\"\",\"p\":\"conj\",\"t\":\"because\"}\n";
-    Dict dict = Dict.fromStream(new ByteArrayInputStream(jsonl.getBytes(StandardCharsets.UTF_8)));
+    Dict dict =
+        Dict.fromStream(new ByteArrayInputStream(jsonl.getBytes(StandardCharsets.UTF_8)), 10);
 
-    List<Term> results = dict.search("citta", 10);
+    List<Term> results = dict.search("citta");
     assertEquals(1, results.size());
     assertEquals("città", results.get(0).root);
 
-    results = dict.search("città", 10);
+    results = dict.search("città");
     assertEquals(1, results.size());
     assertEquals("città", results.get(0).root);
 
-    results = dict.search("perche", 10);
+    results = dict.search("perche");
     assertEquals(1, results.size());
     assertEquals("perché", results.get(0).root);
   }

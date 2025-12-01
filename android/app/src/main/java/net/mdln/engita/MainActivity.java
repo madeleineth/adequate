@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+  private static final int MAX_RESULTS = 50;
+
   private ResultsAdapter resultsAdapter;
   private SearchView searchBox;
   private TextView footerLink;
@@ -25,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
-    this.dict = Dict.fromStream(getResources().openRawResource(R.raw.dictionary_jsonl));
+    this.dict =
+        Dict.fromStream(getResources().openRawResource(R.raw.dictionary_jsonl), MAX_RESULTS);
 
     this.searchBox = findViewById(R.id.search_box);
     this.footerLink = findViewById(R.id.footer_link);
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   private void performSearch(String query) {
-    List<Term> results = dict.search(query, 100);
+    List<Term> results = dict.search(query);
     resultsAdapter.setTerms(results);
     footerLink.setVisibility(results.isEmpty() ? View.VISIBLE : View.GONE);
   }
