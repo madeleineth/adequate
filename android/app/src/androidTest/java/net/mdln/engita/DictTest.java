@@ -29,4 +29,36 @@ public class DictTest {
     assertEquals(
         "ero/eri/era/eravamo/eravate/erano", term.conjugations.get(Term.SimpleTense.IMPERFECT));
   }
+
+  @Test
+  public void searchByConjugatedForm() {
+    String jsonl =
+        "{\"r\":\"venire\",\"f\":\"\",\"p\":\"v\",\"t\":\"to come\","
+            + "\"c\":{\"present\":\"vengo/vieni/viene/veniamo/venite/vengono\","
+            + "\"imperfect\":\"venivo/venivi/veniva/venivamo/venivate/venivano\"}}\n";
+    Dict dict = Dict.fromStream(new ByteArrayInputStream(jsonl.getBytes(StandardCharsets.UTF_8)));
+    results = dict.search("veniva", 10);
+    assertEquals(1, results.size());
+    assertEquals("venire", results.get(0).root);
+  }
+
+  @Test
+  public void searchAccentInsensitive() {
+    String jsonl =
+        "{\"r\":\"città\",\"f\":\"\",\"p\":\"n\",\"t\":\"city\"}\n"
+            + "{\"r\":\"perché\",\"f\":\"\",\"p\":\"conj\",\"t\":\"because\"}\n";
+    Dict dict = Dict.fromStream(new ByteArrayInputStream(jsonl.getBytes(StandardCharsets.UTF_8)));
+
+    List<Term> results = dict.search("citta", 10);
+    assertEquals(1, results.size());
+    assertEquals("città", results.get(0).root);
+
+    results = dict.search("città", 10);
+    assertEquals(1, results.size());
+    assertEquals("città", results.get(0).root);
+
+    results = dict.search("perche", 10);
+    assertEquals(1, results.size());
+    assertEquals("perché", results.get(0).root);
+  }
 }

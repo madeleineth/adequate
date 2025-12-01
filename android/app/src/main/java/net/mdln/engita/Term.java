@@ -3,9 +3,15 @@ package net.mdln.engita;
 import java.util.SortedMap;
 
 class Term {
+  /** Tracks python conjugation.SimpleTense. */
   enum SimpleTense {
     PRESENT,
-    IMPERFECT
+    IMPERFECT,
+    PASSATO_REMOTO,
+    FUTURE,
+    CONDITIONAL,
+    GERUND,
+    PARTICIPLE
   }
 
   final String root;

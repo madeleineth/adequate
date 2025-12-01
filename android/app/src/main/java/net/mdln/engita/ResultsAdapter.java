@@ -63,12 +63,17 @@ class ResultsAdapter extends RecyclerView.Adapter<ResultsAdapter.ViewHolder> {
     StringBuilder message = new StringBuilder();
     term.conjugations.forEach(
         (tense, forms) -> {
-          String[] formArray = forms.split("/");
-          message.append(tense.name().toUpperCase()).append(":\n");
-          String[] labels = {"1sg", "2sg", "3sg", "1pl", "2pl", "3pl"};
-          for (int i = 0; i < formArray.length && i < labels.length; i++) {
-            if (!formArray[i].isEmpty()) {
-              message.append("  ").append(labels[i]).append(": ").append(formArray[i]).append("\n");
+          message.append(tense.name().replace("_", " ")).append(":\n");
+          if (tense == Term.SimpleTense.GERUND || tense == Term.SimpleTense.PARTICIPLE) {
+            message.append("  ").append(forms.replace("/", ", ")).append("\n");
+          } else {
+            String[] formArray = forms.split("/");
+            String[] labels = {"1sg", "2sg", "3sg", "1pl", "2pl", "3pl"};
+            for (int i = 0; i < formArray.length && i < labels.length; i++) {
+              String f = formArray[i];
+              if (!f.isEmpty()) {
+                message.append("  ").append(labels[i]).append(": ").append(f).append("\n");
+              }
             }
           }
           message.append("\n");
