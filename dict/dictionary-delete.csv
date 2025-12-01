@@ -179,7 +179,6 @@ ammalato,n
 ammaliante,adj
 ammasso,n
 ammesso,adj
-ammettere,v
 amministrare,v
 amministrativamente,adv
 amministrativo,adj
@@ -280,17 +279,14 @@ commentare,v
 commentario,n
 commentatore,n
 commento,n
-commerciale,adj
 commercializzare,v
 commercializzato,adj
 commercializzazione,n
 commercialmente,adv
 commerciante,n
 commerciare,v
-commercio,n
 commessa,n
 commesso,n
-commettere,v
 commissariamento,n
 commissariare,v
 commissariato,n
@@ -357,6 +353,10 @@ d,prep
 dramma,n
 drammatico,adj
 dt,other
+duecento ottanta,n
+duemiladieci,n
+duemilaesette,n
+duemilasei,n
 d,unknown
 du,prep
 ed,conj
@@ -387,7 +387,6 @@ fatto,v
 femmina,n
 femminello,n
 femmineo,adj
-femminile,adj
 femminilità,n
 femminismo,n
 fiamma,n
@@ -425,13 +424,13 @@ i,art
 iii,n
 ii,n
 ii,unknown
+il,pron
 immacolata,adj
 immagazzinare,v
 immaginare,v
 immaginario,adj
 immaginario,n
 immaginazione,n
-immagine,n
 immanare,adj
 immanente,adj
 immanenza,n
@@ -462,6 +461,7 @@ impadronirissi,v
 impegnato,v
 impiegato,v
 i,n
+in,adv
 incluso,v
 indicante,v
 indicato,v
@@ -559,7 +559,6 @@ prodotto,v
 producere,v
 programmabile,adj
 programmabilità,n
-programma,n
 programmare,v
 programmato,adj
 programmatore,n
@@ -573,7 +572,6 @@ ratificato,v
 recitato,v
 regolato,v
 release,n
-riammettere,v
 ricevuto,v
 riconosciuto,v
 ridenom inare,v
