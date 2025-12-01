@@ -1,10 +1,12 @@
 export JAVA_HOME:=$(HOME)/android-studio/jbr
 export ANDROID_HOME:=$(HOME)/Android/Sdk
-export JSON_JAR=bin/json.jar
-export JSON_JAR_URL=https://repo1.maven.org/maven2/org/json/json/20250517/json-20250517.jar
-export FORMAT_JAR=bin/google-java-format.jar
-export FORMAT_JAR_URL=https://github.com/google/google-java-format/releases/download/v1.32.0/google-java-format-1.32.0-all-deps.jar
 export PATH:=$(PATH):$(ANDROID_HOME)/platform-tools:$(ANDROID_HOME)/tools
+
+JAVA=$(JAVA_HOME)/bin/java
+JSON_JAR=bin/json.jar
+JSON_JAR_URL=https://repo1.maven.org/maven2/org/json/json/20250517/json-20250517.jar
+FORMAT_JAR=bin/google-java-format.jar
+FORMAT_JAR_URL=https://github.com/google/google-java-format/releases/download/v1.32.0/google-java-format-1.32.0-all-deps.jar
 
 DICT_BASE:=dict/annotated/dict-haiku-n100.csv dict/annotated/dict-haiku-s100-n216.csv dict/annotated/dict-haiku-s316-n192.csv
 IRREGULAR_VERBS:=dict/irregular-verbs.csv
@@ -13,6 +15,7 @@ DELETIONS:=dict/dictionary-delete.csv
 DICT_RES:=android/app/src/main/res/raw/dictionary_jsonl
 ENGITA_JAR_SRC:=android/app/src/main/java/net/mdln/engita/Dict.java android/app/src/main/java/net/mdln/engita/Term.java cli/net/mdln/engita/Main.java
 ENGITA_JAR:=cli/build/engita.jar
+CLI:=$(JAVA) -cp $(ENGITA_JAR):$(JSON_JAR) net.mdln.engita.Main
 
 all: build
 
@@ -37,7 +40,10 @@ pytest: $(DICT_RES)
 androidtest:
 	cd android && ./gradlew connectedAndroidTest
 
-test: pytest androidtest
+clitest: cli
+	$(CLI) essere >/dev/null 2>&1
+
+test: pytest androidtest clitest
 
 $(FORMAT_JAR):
 	mkdir -p bin && curl -sfL -o "$(FORMAT_JAR)" "$(FORMAT_JAR_URL)"
@@ -71,4 +77,4 @@ runcli: $(ENGITA_JAR)
 clean:
 	rm -rf android/build android/app/src/main/res/raw/* android/.gradle cli/build dict/__pycache__
 
-.PHONY: all emulator build install run logcat pytest androidtest test fmt bundle cli runcli clean
+.PHONY: all emulator build install run logcat pytest androidtest clitest test fmt bundle cli runcli clean

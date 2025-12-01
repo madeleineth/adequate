@@ -246,7 +246,6 @@ bowling,n
 box,n
 break,n
 burocratico-amministrativo,adj
-cammino,n
 cantato,v
 caratterizzato,v
 castaneus,adj
@@ -384,12 +383,10 @@ esserne,v
 facente,v
 farvi,v
 fatto,v
-femmina,n
 femminello,n
 femmineo,adj
 femminilità,n
 femminismo,n
-fiamma,n
 fiammiferaia,n
 fiammifero,n
 fiammingo,adj
@@ -410,7 +407,6 @@ frammentazione,n
 frammento,n
 gamma,n
 garantito,v
-gemma,n
 gesammten,adj
 giunto,v
 g,n
@@ -514,6 +510,7 @@ microprogrammazione,n
 militum,unknown
 milligrammo,n
 mi,n
+mio,pron
 mm,n
 m,n
 monogramma,n
@@ -525,6 +522,7 @@ nemmeno,adv
 nemmeno,conj
 new,adj
 n,n
+nostro,pron
 noto,v
 occorrente,v
 of,adv
@@ -610,7 +608,6 @@ simmetrico,adj
 si,n
 sito,v
 s,n
-somma,n
 sommare,v
 sommatoria,n
 sommergere,v
@@ -637,6 +634,7 @@ su l',prep art
 summa,n
 sum,other
 s,unknown
+suo,pron
 su,prep art
 sviluppato,v
 telegramma,n
