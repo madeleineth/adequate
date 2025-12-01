@@ -32,12 +32,13 @@ public class MainActivity extends AppCompatActivity {
 
     this.searchBox = findViewById(R.id.search_box);
     this.footerLink = findViewById(R.id.footer_link);
+    String url = getString(R.string.url) + " " + BuildConfig.GIT_HASH.substring(0, 9);
     this.footerLink.setOnClickListener(
         v -> {
-          Intent intent =
-              new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/madeleineth/adequate"));
+          Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.url)));
           startActivity(intent);
         });
+    this.footerLink.setText(url);
 
     ViewCompat.setOnApplyWindowInsetsListener(
         findViewById(android.R.id.content),
